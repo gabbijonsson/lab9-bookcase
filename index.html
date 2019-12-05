@@ -3,31 +3,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bookstorage</title>
+    <title>myBookshelf</title>
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-    <header>
-        <!-- TODO: Create header containing buttons to add, view, change and remove books. Hamburger-menu top left. -->
-        <nav>
-            <div class="nav-button">ADD BOOK</div>
-            <div class="nav-button">VIEW BOOKS</div>
-            <div class="nav-button">CHANGE BOOK</div>
-            <div class="nav-button">REMOVE BOOK</div>
-        </nav>
-        <!-- TODO: Create title of page. Top center. -->
-        <h1 class="menu_title text--uppercase">bookshelf</h1>
-        <!-- TODO: Create -SOMETHING- of page. Top right. ?? -->
+    <header class="navbar_container">
+        <div class="navbar_title">
+            <h1 class="navbar_title-text text--cursive">my</h1>
+            <h1 class="navbar_title-text text--heading text--uppercase">bookshelf</h1>
+        </div>
+        <div class="navbar_img_container">
+            <img src="/src/img/menu-button.png" alt="menu-button" class="navbar_img">
+        </div>
+        <ul class="navbar_list">
+            <li class="navbar_list-item text--menu text--uppercase">View</li>
+            <li class="navbar_list-item text--menu text--uppercase">Edit</li>
+        </ul>
     </header>
+    <!-- TODO: Add ---- to deal with adding, changing and removing books. Add a 'view bookshelf'. -->
     <main>
-        <!-- TODO: Create fields to supply book-information -->
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto tempora nesciunt recusandae, 
-            fugiat animi incidunt mollitia deserunt eum, asperiores magni corrupti eos beatae exercitationem, 
-            soluta commodi alias ut minus quaerat!</p>
+
     </main>
+    <!-- TODO: Add a field to display statusmessages from the API-requests. -->
     <footer>
-        <!-- TODO: Create status-log for API-requests -->
-        ending with footer
+
     </footer>
     <script src="src/bookStorage.js"></script>
 </body>

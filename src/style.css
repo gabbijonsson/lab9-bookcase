@@ -1,37 +1,135 @@
-@import url('https://fonts.googleapis.com/css?family=Slabo+27px&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Mono&display=swap');
 
 * {
     box-sizing: border-box;
-    width: 100%;
 }
 
-header {
-    background: #FDF5E6;
-    position: fixed;
-    top: 0em;
+body {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+span {
+    display: block;
+}
+
+.navbar_container {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2)
+        ),
+        url("/src/img/joe-cox-xfc43saqKPQ-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-main {
-    background: blue;
-    height: 2500px;
+.navbar_title {
+    padding: 1rem 2rem;
+    white-space: nowrap;
 }
 
-footer {
-    background: firebrick;
-    position: fixed;
-    bottom: 0em;
+.navbar_title-text {
+    display: inline;
 }
 
-.nav-button {
-    font-size: 2rem;
+.navbar_list {
+    align-self: center;
+    margin: 0;
+    padding: 1rem 2rem;
 }
 
-.menu_title {
-    font-family: 'Slabo 27px', serif;
+.navbar_list-item {
+    display: inline;
+    padding: 0rem 4rem;
+    line-height: 3;
+}
+
+.navbar_img_container {
+    align-self: center;
+}
+.navbar_img_container img {
+    max-width: 50px;
+    padding: 0.5rem;
+    display: none;
+}
+
+.text--cursive {
+    font-family: 'Homemade Apple', 'Georgia', cursive;
+    font-size: 3rem;
+    color: #ECD9BA;
+}
+
+.text--heading {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-size: 3.5rem;
+    color: #ECD9BA;
 }
 
 .text--uppercase {
     text-transform: uppercase;
+}
+
+.text--menu {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #ECD9BA;
+}
+
+@media screen and (max-width: 940px) {
+    .navbar_container {
+        flex-direction: column;
+    }
+
+    .navbar_title {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar_list-item {
+        line-height: normal;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar_list {
+        display: none;
+    }
+    
+    .navbar_img_container img {
+        display: inline-block;
+    }
+
+    .navbar_img_container {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .navbar_title {
+        display: none;
+    }
+
+    .navbar_list {
+        display: inline;
+    }
+
+    .navbar_list-item {
+        padding: 0rem 2rem;
+    }
+
+    .navbar_img_container {
+        display: none;
+    }
 }
