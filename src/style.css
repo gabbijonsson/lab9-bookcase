@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px&display=swap');
+
+* {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+header {
+    background: #FDF5E6;
+    position: fixed;
+    top: 0em;
+    display: flex;
+    justify-content: space-around;
+}
+
+main {
+    background: blue;
+    height: 2500px;
+}
+
+footer {
+    background: firebrick;
+    position: fixed;
+    bottom: 0em;
+}
+
+.nav-button {
+    font-size: 2rem;
+}
+
+.menu_title {
+    font-family: 'Slabo 27px', serif;
+}
+
+.text--uppercase {
+    text-transform: uppercase;
+}
