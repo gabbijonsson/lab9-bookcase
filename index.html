@@ -24,74 +24,16 @@
         <div class="bookshelf_container">
             <h1 class="bookshelf_title text--menu text--uppercase">your current collection of books</h1>
             <div class="bookshelf_books_container text--normal">
-                <div class="bookshelf_book" id="f3231">
-                    <ul class="bookshelf_book-info">
-                        <li class="bookshelf_book-title nobreak">testing title</li>
-                        <li class="bookshelf_book-author nobreak">author mcauthor</li>
-                        <li class="bookshelf_book-changed nobreak">was changed</li>
-                    </ul>
-                    <ul class="bookshelf_book-buttons">
-                        <li class="bookshelf_book-edit"><button>EDIT</button> </li>
-                        <li class="bookshelf_book-delete"><button>DELETE</button></li>
-                    </ul>
-                </div>
-                <div class="bookshelf_book" id="">
-                    <ul class="bookshelf_book-info">
-                        <li class="bookshelf_book-title nobreak">testing title</li>
-                        <li class="bookshelf_book-author nobreak">author mcauthor</li>
-                        <li class="bookshelf_book-changed nobreak">was changed</li>
-                    </ul>
-                    <ul class="bookshelf_book-buttons">
-                        <li class="bookshelf_book-edit"><button>EDIT</button> </li>
-                        <li class="bookshelf_book-delete"><button>DELETE</button></li>
-                    </ul>
-                </div>
-                <div class="bookshelf_book" id="">
-                    <ul class="bookshelf_book-info">
-                        <li class="bookshelf_book-title nobreak">testing title</li>
-                        <li class="bookshelf_book-author nobreak">author mcauthor</li>
-                        <li class="bookshelf_book-changed nobreak">was changed</li>
-                    </ul>
-                    <ul class="bookshelf_book-buttons">
-                        <li class="bookshelf_book-edit"><button>EDIT</button> </li>
-                        <li class="bookshelf_book-delete"><button>DELETE</button></li>
-                    </ul>
-                </div>
-                <div class="bookshelf_book" id="">
-                    <ul class="bookshelf_book-info">
-                        <li class="bookshelf_book-title nobreak">testing title</li>
-                        <li class="bookshelf_book-author nobreak">author mcauthor</li>
-                        <li class="bookshelf_book-changed nobreak">was changed</li>
-                    </ul>
-                    <ul class="bookshelf_book-buttons">
-                        <li class="bookshelf_book-edit"><button>EDIT</button> </li>
-                        <li class="bookshelf_book-delete"><button>DELETE</button></li>
-                    </ul>
-                </div>
-                <div class="bookshelf_book" id="">
-                    <ul class="bookshelf_book-info">
-                        <li class="bookshelf_book-title nobreak">testing title</li>
-                        <li class="bookshelf_book-author nobreak">author mcauthor</li>
-                        <li class="bookshelf_book-changed nobreak">was changed</li>
-                    </ul>
-                    <ul class="bookshelf_book-buttons">
-                        <li class="bookshelf_book-edit"><button>EDIT</button> </li>
-                        <li class="bookshelf_book-delete"><button>DELETE</button></li>
-                    </ul>
-                </div>
-
             </div>
             <div class="bookshelf_editor_container">
                 <div id="addbook"></div>
                 <div class="bookshelf_editor_add-books">
                     <h1 class="bookshelf_title text--menu text--uppercase">ADD BOOK</h1>
-                    <form class="addBookForm">
+                    <div class="addBookForm">
                         <input type="text" id="addBookBookAuthor" name="author" placeholder="Name of author">
                         <input type="text" id="addBookBookTitle" name="title" placeholder="Title of book">
-                        <div class="button_container">
-                            <input type="submit" id="addBookSubmitBtn" value="ADD">
-                        </div>
-                    </form>
+                        <button id="addBookSubmitBtn">ADD</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,7 +69,6 @@
 
         </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="src/bookStorage.js"></script>
 </body>
 

@@ -134,13 +134,8 @@ button:hover {
     gap: 1rem;
 }
 
-.button_container {
-    grid-column: 1 / 3;
-    padding: 0.3rem;
-    display: grid;
-}
-
 #addBookSubmitBtn {
+    grid-column: 1 / 3;
     justify-self: center;
     border-radius: 12px;
     border-color: #2C4E4C;
@@ -154,6 +149,10 @@ button:hover {
 #addBookSubmitBtn:hover {
         background-color: #2C4E4C;
         color: white;
+}
+
+.newTitle, .newAuthor {
+    
 }
 
 /* Error-container in footer */
