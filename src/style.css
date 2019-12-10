@@ -1,27 +1,205 @@
 @import url('https://fonts.googleapis.com/css?family=Homemade+Apple&display=swap');
 @import url('https://fonts.googleapis.com/css?family=PT+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
 
 * {
     box-sizing: border-box;
 }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     margin: 0;
+    background-color: #ECD9BA;
 }
 
 ul {
     list-style-type: none;
+    padding-left: 0;
 }
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 span {
     display: block;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+button {
+    border-radius: 12px;
+    border-color: #2C4E4C;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.3rem 1rem;
+    transition-duration: 0.5s;
+}
+
+button:hover {
+    background-color: #2C4E4C;
+    color: white;
+}
+
+.text--uppercase {
+    text-transform: uppercase;
+}
+
+.text--yellow {
+    color: #ECD9BA;
+}
+
+.nobreak {
+    white-space: nowrap;
+}
+
+/* Bookshelf - BOOKS */
+#viewbooks {
+    height: 85px;
+}
+
+.bookshelf_container {
+    display: grid;
+    justify-content: center;
+    /* margin: 85px 2rem; */
+}
+
+.bookshelf_title {
+    text-align: center;
+    justify-self: center;
+    width: 80vw;
+}
+
+.bookshelf_books_container {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    margin: 0rem 1rem;
+}
+
+.bookshelf_book {
+    padding: 0.3rem;
+    display: inline-flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.bookshelf_book-info {
+    grid-template-areas: 
+    "booktitle bookauthor bookchanged editbutton deletebutton";
+    margin-right: 2rem;
+}
+
+.bookshelf_book-info li{
+    display: inline;
+    padding: 0.3rem;
+}
+
+.bookshelf_book-buttons {
+    margin-right: 2rem;
+
+}
+
+.bookshelf_book-buttons li {
+    display: inline;
+    padding: 0.5rem;
+}
+
+/* Bookshelf - ADD BOOKS */
+
+.bookshelf_editor_container {
+    margin-top: 20vh;
+    margin-bottom: 3000px;
+}
+
+#addbook {
+    margin-bottom: 100px;
+}
+
+.addBookForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+.button_container {
+    grid-column: 1 / 3;
+    padding: 0.3rem;
+    display: grid;
+}
+
+#addBookSubmitBtn {
+    justify-self: center;
+    border-radius: 12px;
+    border-color: #2C4E4C;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.5rem 1.5rem;
+    transition-duration: 0.5s;
+}
+    
+#addBookSubmitBtn:hover {
+        background-color: #2C4E4C;
+        color: white;
+}
+
+/* Error-container in footer */
+
+.error_list_container {
+    margin-bottom: 0px;
+    background: #2C4E4C;
+    background-size: cover;
+    max-height: 12vh;
+    overflow: auto;
+}
+
+.error_list_title {
+    padding: 1rem 0 0 0;
+}
+
+.error_list_item {
+    display: grid;
+    grid-template-areas: 
+    "errormsg attemptnr";
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: auto;
+}
+
+.error_list_item li{
+    display: inline;
+    padding: 0rem 1rem 1rem 1rem;
+    
+}
+
+.error_list_item-message {
+    grid-area: errormsg;
+}
+
+.error_list_item-attemptnumber {
+    grid-area: attemptnr;
+}
+
+/* Navigation and header */
+
 .navbar_container {
+    height: 85px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-wrap: wrap;
     background-image: linear-gradient(
@@ -45,7 +223,6 @@ span {
 .navbar_list {
     align-self: center;
     margin: 0;
-    padding: 1rem 2rem;
 }
 
 .navbar_list-item {
@@ -57,79 +234,47 @@ span {
 .navbar_img_container {
     align-self: center;
 }
+
 .navbar_img_container img {
     max-width: 50px;
     padding: 0.5rem;
+    cursor: pointer;
     display: none;
 }
 
+/* For text used in header and menus */
+
 .text--cursive {
     font-family: 'Homemade Apple', 'Georgia', cursive;
-    font-size: 3rem;
-    color: #ECD9BA;
+    font-size: 2rem;
 }
 
 .text--heading {
     font-family: 'PT Mono', 'Courier New', monospace;
-    font-size: 3.5rem;
-    color: #ECD9BA;
-}
-
-.text--uppercase {
-    text-transform: uppercase;
+    font-size: 2.5rem;
 }
 
 .text--menu {
     font-family: 'PT Mono', 'Courier New', monospace;
     font-weight: bold;
-    font-size: 2rem;
-    color: #ECD9BA;
+    font-size: 1.5rem;
 }
 
-@media screen and (max-width: 940px) {
-    .navbar_container {
-        flex-direction: column;
-    }
-
-    .navbar_title {
-        padding: 0.5rem 1rem;
-    }
-
-    .navbar_list-item {
-        line-height: normal;
-    }
+.text--normal {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-size: 1rem;
 }
 
-@media screen and (max-width: 600px) {
-    .navbar_list {
-        display: none;
-    }
-    
-    .navbar_img_container img {
-        display: inline-block;
-    }
 
-    .navbar_img_container {
-        position: fixed;
-        top: 1.5rem;
-        right: 1.5rem;
-    }
-}
+/* Media Queries */
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 700px) {
     .navbar_title {
         display: none;
     }
-
     .navbar_list {
-        display: inline;
-    }
-
-    .navbar_list-item {
-        padding: 0rem 2rem;
-    }
-
-    .navbar_img_container {
-        display: none;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
     }
 }
