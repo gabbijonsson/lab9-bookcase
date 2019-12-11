@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>myBookshelf</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+    <header class="navbar_container">
+        <div class="navbar_title">
+            <h1 class="navbar_title-text text--yellow text--cursive">my</h1>
+            <h1 class="navbar_title-text text--yellow text--heading text--uppercase">bookshelf</h1>
+        </div>
+        <ul class="navbar_list">
+            <li class="navbar_list-item text--menu text--yellow text--uppercase"><a href="#viewbooks" id="viewButton">View</a></li>
+            <li class="navbar_list-item text--menu text--yellow text--uppercase"><a href="#addbook">Add</a></li>
+        </ul>
+        <span class="successbox_container text--yellow text--normal"><input type='checkbox' id="successbox"
+                name='please' value='please'>Box of success</span>
+    </header>
+    <main>
+        <div id="viewbooks"></div>
+        <div class="bookshelf_container">
+            <h1 class="bookshelf_title text--menu text--uppercase">your current collection of books</h1>
+            <div class="bookshelf_books_container text--normal">
+            </div>
+            <div class="bookshelf_editor_container">
+                <div id="addbook"></div>
+                <div class="bookshelf_editor_add-books">
+                    <h1 class="bookshelf_title text--menu text--uppercase">ADD BOOK</h1>
+                    <div class="addBookForm">
+                        <input type="text" id="addBookBookAuthor" name="author" placeholder="Name of author">
+                        <input type="text" id="addBookBookTitle" name="title" placeholder="Title of book">
+                        <button id="addBookSubmitBtn">ADD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="error_container text--normal">
+            <ul class="error_list_item error_list_title">
+                <li class=error_list_title-item">MESSAGE:</li>
+                <li class="error_list_title-item">ATTEMPT#:</li>
+            </ul>
+            <ul class="error_list_container">
+
+            </ul>
+
+        </div>
+    </footer>
+    <script src="src/bookStorage.js"></script>
+</body>
+
+</html>

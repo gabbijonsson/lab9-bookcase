@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
+
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #ECD9BA;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+span {
+    display: block;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+button {
+    border-radius: 12px;
+    border-color: #2C4E4C;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.3rem 1rem;
+    transition-duration: 0.5s;
+}
+
+button:hover {
+    background-color: #2C4E4C;
+    color: white;
+}
+
+.text--uppercase {
+    text-transform: uppercase;
+}
+
+.text--yellow {
+    color: #ECD9BA;
+}
+
+.nobreak {
+    white-space: nowrap;
+}
+
+/* Bookshelf - BOOKS */
+#viewbooks {
+    height: 85px;
+}
+
+.bookshelf_container {
+    display: grid;
+    justify-content: center;
+    /* margin: 85px 2rem; */
+}
+
+.bookshelf_title {
+    text-align: center;
+    justify-self: center;
+    width: 80vw;
+}
+
+.bookshelf_books_container {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    margin: 0rem 1rem;
+}
+
+.bookshelf_book {
+    padding: 0.3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-content: space-between;
+    align-content: center;
+}
+
+.bookshelf_book-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 2rem;
+    justify-content: center;
+}
+
+.bookshelf_book-info li{
+    display: inline;
+    padding: 0.3rem;
+}
+
+.bookshelf_book-buttons {
+    margin-right: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.bookshelf_book-buttons li {
+    display: inline;
+    padding: 0.5rem;
+}
+
+/* Bookshelf - ADD BOOKS */
+
+.bookshelf_editor_container {
+    margin-top: 20vh;
+    margin-bottom: 3000px;
+}
+
+#addbook {
+    margin-bottom: 100px;
+}
+
+.addBookForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+#addBookSubmitBtn {
+    grid-column: 1 / 3;
+    justify-self: center;
+    border-radius: 12px;
+    border-color: #2C4E4C;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.5rem 1.5rem;
+    transition-duration: 0.5s;
+}
+    
+#addBookSubmitBtn:hover {
+        background-color: #2C4E4C;
+        color: white;
+}
+
+.newTitle {
+    margin: 1rem;
+}
+
+/* Error-container in footer */
+
+.error_container {
+    background: #2C4E4C;
+    background-size: cover;
+
+}
+
+.error_list_container {
+    margin-bottom: 0px;
+    max-height: 12vh;
+    overflow: auto;
+}
+
+.error_list_title {
+    padding: 1rem 0 0 0;
+}
+
+.error_list_item {
+    display: grid;
+    grid-template-areas: 
+    "errormsg attemptnr";
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: auto;
+    border-bottom: 3px solid black;
+}
+
+.error_list_item li{
+    display: inline;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    
+}
+
+.error_list_item-message {
+    grid-area: errormsg;
+}
+
+.error_list_item-attemptnumber {
+    grid-area: attemptnr;
+}
+
+/* Navigation and header */
+
+.navbar_container {
+    height: 85px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2)
+        ),
+        url("/src/img/joe-cox-xfc43saqKPQ-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-content: center;
+}
+
+.navbar_title {
+    padding: 1rem 2rem;
+    white-space: nowrap;
+}
+
+.navbar_title-text {
+    display: inline;
+}
+
+.navbar_list {
+    align-self: center;
+    margin: 0;
+}
+
+.navbar_list-item {
+    display: inline;
+    padding: 0rem 4rem;
+    line-height: 2.5;
+}
+
+.successbox_container {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* For text used in header and menus */
+
+.text--cursive {
+    font-family: 'Homemade Apple', 'Georgia', cursive;
+    font-size: 2rem;
+}
+
+.text--heading {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-size: 2.5rem;
+}
+
+.text--menu {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.text--normal {
+    font-family: 'PT Mono', 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+
+/* Media Queries */
+
+@media screen and (max-width: 870px) {
+    .navbar_title {
+        display: none;
+    }
+    .navbar_list {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+    }
+    .successbox_container {
+        width: 100vw;
+        justify-self: center;
+        align-self: center;
+    }
+}

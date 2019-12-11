@@ -1,0 +1,11 @@
+2019-12-10 - Kodgranskning av Robin och Alexandras projekt
+Repo: https://github.com/Magnevik/uppgift9alex
+Commit: 36a6c94
+
+Förbättringspunkt:
+- För mig blev funktionen createBook något svåröverskådlig, då den gör flera olika saker (som skulle kunna vara egna funktioner). Kanske går att bryta ned i mindre delar/helper functions?
+
+Bra grejor:
+- Bra och tydlig struktur på koden med querySelectors och Event Listeners.
+- Hanteringen av felmeddelanden är väldigt tydlig. Gillar att ni lagt till uppdatering av scrollen.
+- Överlag lättläst och lättnavigerad kod. Det är inte svårt att "hitta" och det är inga långa haranger att följa.
