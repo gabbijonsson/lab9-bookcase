@@ -1,5 +1,6 @@
 const apiUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php'
 let userApiKey = '';
+let addPlease = false;
 
 window.addEventListener('load', () => {
     console.log('Window loaded..')
@@ -11,25 +12,38 @@ window.addEventListener('load', () => {
     let addBookAuthor = document.querySelector('#addBookBookAuthor');
     let addBookTitle = document.querySelector('#addBookBookTitle');
     let bookContainer = document.querySelector('.bookshelf_books_container');
+    let errorContainer = document.querySelector('.error_list_container');
+    let successBox = document.querySelector('#successbox');
 
+    successBox.checked = false;
     addBookSubmitButton.addEventListener('click', addBook);
+    successBox.addEventListener('change', () => {addPlease = successBox.checked});
 
     /**
      * Sends GET-request. Used for every GET-request with different query-adds and responshandlers
      * @param {string} queries - A query string that is appended to the API-URL.
      * @param {function} handleResponse - A callback function to handle the response from the API.
      */
-    const sendRequest = (queries, handleResponse) => {
+    const sendRequest = (queries, handleResponse, requestCount = 1) => {
+        if (addPlease) {
+            queries += '&please';
+        }
+        console.log('please is: ' + addPlease);
+        
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', apiUrl + queries + '&please');                                      // Send GET-request with base-url and the queries specified by parameter
+        xhr.open('GET', apiUrl + queries);                                      // Send GET-request with base-url and the queries specified by parameter
         xhr.onload = function () {
-            if (this.status == 200) {
-                handleResponse(JSON.parse(this.responseText));                              // Initiate the responsehandler specified by parameter, send parsed responsetext as argument to responsehandler.
+            let response = JSON.parse(this.responseText);
+            if (this.status == 200 && response.status == 'success') {
+                handleResponse(response);                              // Initiate the responsehandler specified by parameter, send parsed responsetext as argument to responsehandler.
             }
             // ! This needs to be checked and fixed so that it handles statuscodes other than 200. 
             else {
-                let errorMsg = JSON.parse(this.responseText);
-                console.log(errorMsg.status)
+                errorBuilder(response.message, requestCount, queries);
+                if(requestCount < 5) {
+                    console.log('Requestcount: ' + requestCount);
+                    sendRequest(queries, handleResponse, requestCount+1)
+                }
             }
         }
         xhr.send();
@@ -133,14 +147,13 @@ window.addEventListener('load', () => {
 
     // Update book-list with information from the API
     function fetchBookResponseHandler(responseObject) {
+        while(bookContainer.hasChildNodes()) {
+            bookContainer.removeChild(bookContainer.firstChild)
+        }
         responseObject.data.forEach(appendBook);
     }
 
     function fetchBookSelection() {
-        let currentBooks = bookContainer.children;
-        while(bookContainer.hasChildNodes()) {
-            bookContainer.removeChild(bookContainer.firstChild)
-        }
         let fetchQuery = '?op=select&key=' + userApiKey;
         sendRequest(fetchQuery, fetchBookResponseHandler);
     }
@@ -207,12 +220,29 @@ window.addEventListener('load', () => {
         }
     }
 
-    // ! EVERYTHING BELOW THIS LINE WILL BE REMOVED BEFORE PRESENTATION AND SUBMIT
-    /* Test stuff n' thangs with delayed console.log */
+    function errorBuilder(message, requestCount, queries) {
+        console.log('We\'re inside errorBuilder');
+        console.log(message);
+        if(requestCount == 5) {
+            addBookSubmitButton.disabled = false;
+        }
+                
+        // Create the UL for errorinformation
+        let newError = document.createElement('ul');
+        newError.className = 'error_list_item';
+        errorContainer.prepend(newError);
 
-    const delayedConsoleLog = () => {
-        console.log(userApiKey);
+        // Add errorinformation
+        let newErrorMsg = document.createElement('li');
+        newErrorMsg.className = 'error_list_item-message';
+        newErrorMsg.innerHTML = message + ' | On query: ' + queries;
+        newError.appendChild(newErrorMsg);
+
+        // Add attemptnumber
+        let newAttemptNr = document.createElement('li');
+        newAttemptNr.className = 'error_list_item-attemptnumber';
+        newAttemptNr.innerHTML = requestCount;
+        newError.appendChild(newAttemptNr);
+
     }
-    setTimeout(delayedConsoleLog, 3000);
-
 })

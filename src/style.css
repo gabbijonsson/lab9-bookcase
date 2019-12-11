@@ -152,20 +152,19 @@ button:hover {
 }
 
 .newTitle {
-    /* TODO: Style this */
     margin: 1rem;
-}
-
-.newAuthor {
-    /* TODO: Style this */
 }
 
 /* Error-container in footer */
 
-.error_list_container {
-    margin-bottom: 0px;
+.error_container {
     background: #2C4E4C;
     background-size: cover;
+
+}
+
+.error_list_container {
+    margin-bottom: 0px;
     max-height: 12vh;
     overflow: auto;
 }
@@ -180,11 +179,12 @@ button:hover {
     "errormsg attemptnr";
     grid-template-columns: 4fr 1fr;
     grid-template-rows: auto;
+    border-bottom: 3px solid black;
 }
 
 .error_list_item li{
     display: inline;
-    padding: 0rem 1rem 1rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     
 }
 
@@ -213,6 +213,8 @@ button:hover {
         url("/src/img/joe-cox-xfc43saqKPQ-unsplash.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    justify-content: center;
+    align-content: center;
 }
 
 .navbar_title {
@@ -232,19 +234,16 @@ button:hover {
 .navbar_list-item {
     display: inline;
     padding: 0rem 4rem;
-    line-height: 3;
+    line-height: 2.5;
 }
 
-.navbar_img_container {
+.successbox_container {
     align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.navbar_img_container img {
-    max-width: 50px;
-    padding: 0.5rem;
-    cursor: pointer;
-    display: none;
-}
 
 /* For text used in header and menus */
 
@@ -272,7 +271,7 @@ button:hover {
 
 /* Media Queries */
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 870px) {
     .navbar_title {
         display: none;
     }
@@ -280,5 +279,10 @@ button:hover {
         width: 100vw;
         display: flex;
         justify-content: center;
+    }
+    .successbox_container {
+        width: 100vw;
+        justify-self: center;
+        align-self: center;
     }
 }
