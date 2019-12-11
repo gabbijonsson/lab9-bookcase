@@ -90,15 +90,17 @@ button:hover {
 
 .bookshelf_book {
     padding: 0.3rem;
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     justify-content: space-between;
     align-content: center;
 }
 
 .bookshelf_book-info {
-    grid-template-areas: 
-    "booktitle bookauthor bookchanged editbutton deletebutton";
+    display: flex;
+    flex-wrap: wrap;
     margin-right: 2rem;
+    justify-content: center;
 }
 
 .bookshelf_book-info li{
@@ -108,7 +110,9 @@ button:hover {
 
 .bookshelf_book-buttons {
     margin-right: 2rem;
-
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .bookshelf_book-buttons li {
