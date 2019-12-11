@@ -151,8 +151,13 @@ button:hover {
         color: white;
 }
 
-.newTitle, .newAuthor {
-    
+.newTitle {
+    /* TODO: Style this */
+    margin: 1rem;
+}
+
+.newAuthor {
+    /* TODO: Style this */
 }
 
 /* Error-container in footer */

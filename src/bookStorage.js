@@ -157,11 +157,12 @@ window.addEventListener('load', () => {
     function editBook(event) {
         console.log('Edit button pushed!');
         let buttonID = event.currentTarget.getAttribute('bookkey')
-        let changeParent = document.getElementById(buttonID).querySelector('.bookshelf_book-info');
-
+        let bookInfoContainer = document.getElementById(buttonID).querySelector('.bookshelf_book-info');
+        event.currentTarget.removeEventListener('click', editBook);
 
         // Change buttontext to SAVE
         event.currentTarget.innerHTML = 'SAVE';
+        event.currentTarget.addEventListener('click', saveEditedBook);
 
         // Save text-fields from previous book
         let authorElement = document.getElementById(buttonID).querySelector('.bookshelf_book-author');
@@ -170,7 +171,7 @@ window.addEventListener('load', () => {
         let titleOldText = titleElement.innerHTML;
         let updateElement = document.getElementById(buttonID).querySelector('.bookshelf_book-changed');
 
-        // Remove previous text
+        // Remove li-elements containing outdated book-info
         authorElement.remove();
         titleElement.remove();
         updateElement.remove();
@@ -178,19 +179,33 @@ window.addEventListener('load', () => {
         // Add input-fields for changes
         let newAuthorInput = document.createElement('input');
         newAuthorInput.placeholder = authorOldText;
-        newAuthorInput.className = newAuthor;
-        changeParent.appendChild(newAuthorInput);
+        newAuthorInput.value = authorOldText;
+        newAuthorInput.setAttribute('required', '');
+        newAuthorInput.className = 'newAuthor';
+        bookInfoContainer.appendChild(newAuthorInput);
+
         let newTitleInput = document.createElement('input');
         newTitleInput.placeholder = titleOldText;
-        newTitleInput.className = newTitle;
-        changeParent.appendChild(newTitleInput);
-        
-        
-
-        
-        let editQuery = '?op=update&key=' + userApiKey + '&id=' + buttonID + '&title=' + newTitle + '&author=' + newAuthor;
+        newTitleInput.value = titleOldText;
+        newTitleInput.setAttribute('required', '');
+        newTitleInput.className = 'newTitle';
+        bookInfoContainer.appendChild(newTitleInput);
     }
     
+    function saveEditedBook(event) {
+        let buttonID = event.currentTarget.getAttribute('bookkey')
+        let newAuthorValue = document.querySelector('.newAuthor').value;
+        console.log(newAuthorValue);
+        let newTitleValue = document.querySelector('.newTitle').value;
+        console.log(newTitleValue);
+        
+        let editQuery = `?op=update&key=${userApiKey}&id=${buttonID}&title=${newTitleValue}&author=${newAuthorValue}`;
+        if(!newTitleValue || !newAuthorValue) {
+            alert('Title and Author are required. Please enter bookinformation and try to save again!')
+        } else {
+            sendRequest(editQuery, fetchBookSelection);
+        }
+    }
 
     // ! EVERYTHING BELOW THIS LINE WILL BE REMOVED BEFORE PRESENTATION AND SUBMIT
     /* Test stuff n' thangs with delayed console.log */
