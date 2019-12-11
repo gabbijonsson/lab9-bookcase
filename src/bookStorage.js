@@ -1,10 +1,14 @@
 const apiUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php'
 let userApiKey = '';
 let addPlease = false;
+let addOperation = '?op=insert&key=';
+let viewOperation = '?op=select&key=';
+let editOperation = '?op=update&key=';
+let deleteOperation = '?op=delete&key=';
 
 window.addEventListener('load', () => {
     console.log('Window loaded..')
-    
+
     /**
      * Event-listeners and queryselectors
      */
@@ -13,14 +17,14 @@ window.addEventListener('load', () => {
     let addBookTitle = document.querySelector('#addBookBookTitle');
     let viewBooksBtn = document.querySelector('#viewButton')
     let bookContainer = document.querySelector('.bookshelf_books_container');
-    let errorContainer = document.querySelector('.error_list_container');
+    let statusContainer = document.querySelector('.status_list_container');
     let successBox = document.querySelector('#successbox');
 
     successBox.checked = false;
 
     addBookSubmitButton.addEventListener('click', addBook);
     viewBooksBtn.addEventListener('click', fetchBookSelection)
-    successBox.addEventListener('change', () => {addPlease = successBox.checked});
+    successBox.addEventListener('change', () => { addPlease = successBox.checked });
 
     /**
      * Sends GET-request. Used for every GET-request with different query parameters and responshandlers
@@ -38,15 +42,16 @@ window.addEventListener('load', () => {
         xhr.onload = function () {
             let response = JSON.parse(this.responseText);
             if (this.status == 200 && response.status == 'success') {
+                createStatusUpdate(response.message, requestCount, queries, 'success')
                 // Invoke the responsehandler specified by parameter, send parsed responsetext as argument to responsehandler.
                 handleResponse(response);
             }
             else {
                 // Invoke errorBuilder with the errormessage, number of requests made and the query sent in the request. Invoke sendRequest recursively if requestCount is less than 5.
-                errorBuilder(response.message, requestCount, queries);
-                if(requestCount < 5) {
+                createStatusUpdate(response.message, requestCount, queries, 'fail');
+                if (requestCount < 5) {
                     console.log('Requestcount: ' + requestCount);
-                    sendRequest(queries, handleResponse, requestCount+1)
+                    sendRequest(queries, handleResponse, requestCount + 1)
                 }
             }
         }
@@ -81,10 +86,10 @@ window.addEventListener('load', () => {
     }
 
     // Create the div to hold the bookcontent. Append bookinfo and bookbuttons.
-    function createBook(data) {    
+    function createBook(data) {
         let book = document.createElement('div');
         book.id = data.id;
-        book.className = 'bookshelf_book';      
+        book.className = 'bookshelf_book';
         book.appendChild(createBookInfoContainer(data.author, data.title, data.updated));
         book.appendChild(createBookButtons(data.id));
         return book;
@@ -146,10 +151,15 @@ window.addEventListener('load', () => {
     // Disable add-button and compile query. Invoke sendRequest with query.
     function addBook() {
         addBookSubmitButton.disabled = true;
-        let newBookTitle = '&title=' + addBookTitle.value;
-        let newBookAuthor = '&author=' + addBookAuthor.value;
-        let addQuery = '?op=insert&key=' + userApiKey + newBookTitle + newBookAuthor;
-        sendRequest(addQuery, addBookResponseHandler);
+        if (!addBookTitle.value || !addBookAuthor.value) {
+            alert('Title and Author are required. Please enter bookinformation and try again!');
+            addBookSubmitButton.disabled = false;
+        } else {
+            let newBookTitle = '&title=' + addBookTitle.value;
+            let newBookAuthor = '&author=' + addBookAuthor.value;
+            let addQuery = addOperation + userApiKey + newBookTitle + newBookAuthor;
+            sendRequest(addQuery, addBookResponseHandler);
+        }
     }
 
     // Invoke createBook with a bookobject. Append the book-element created in createBook to the bookContainer-element
@@ -159,7 +169,7 @@ window.addEventListener('load', () => {
 
     // Clear the current list of books. Take response from sendRequest and iterate through the array of books, send each book to appendBook-function.
     function fetchBookResponseHandler(responseObject) {
-        while(bookContainer.hasChildNodes()) {
+        while (bookContainer.hasChildNodes()) {
             bookContainer.removeChild(bookContainer.firstChild)
         }
         responseObject.data.forEach(appendBook);
@@ -167,7 +177,7 @@ window.addEventListener('load', () => {
 
     // Compile query to fetch current users bookcollection. Invoke sendRequest with compiled query.
     function fetchBookSelection() {
-        let fetchQuery = '?op=select&key=' + userApiKey;
+        let fetchQuery = viewOperation + userApiKey;
         sendRequest(fetchQuery, fetchBookResponseHandler);
     }
 
@@ -176,7 +186,7 @@ window.addEventListener('load', () => {
         console.log('Delete button pushed!');
         let buttonID = event.currentTarget.getAttribute('bookkey');
         console.log('Buttonkey: ' + buttonID);
-        let deleteQuery = '?op=delete&key=' + userApiKey + '&id=' + buttonID;
+        let deleteQuery = deleteOperation + userApiKey + '&id=' + buttonID;
         sendRequest(deleteQuery, fetchBookSelection);
     }
 
@@ -209,7 +219,7 @@ window.addEventListener('load', () => {
     }
 
     // Remove elements related to edited book.
-    function removeBookInfo(author, title,  update) {
+    function removeBookInfo(author, title, update) {
         author.remove();
         title.remove();
         update.remove();
@@ -218,13 +228,13 @@ window.addEventListener('load', () => {
     // Create input-element for editing bookinfo
     function createEditInputElement(inputCategory, oldText) {
         let newInputElem = document.createElement('input');
-        newInputElem.placeholder = oldText;
+        newInputElem.placeholder = inputCategory;
         newInputElem.value = oldText;
         newInputElem.setAttribute('required', '');
         newInputElem.className = 'new' + inputCategory;
         return newInputElem;
     }
-    
+
     // Save changes made to book into variables. Compile query for editing book. If new variables have a value, invoke sendRequest with compiled query.
     function saveEditedBook(event) {
         let buttonID = event.currentTarget.getAttribute('bookkey')
@@ -232,36 +242,54 @@ window.addEventListener('load', () => {
         console.log(newAuthorValue);
         let newTitleValue = document.querySelector('.newTitle').value;
         console.log(newTitleValue);
-        
-        let editQuery = `?op=update&key=${userApiKey}&id=${buttonID}&title=${newTitleValue}&author=${newAuthorValue}`;
-        if(!newTitleValue || !newAuthorValue) {
+
+        let editQuery = `${editOperation}${userApiKey}&id=${buttonID}&title=${newTitleValue}&author=${newAuthorValue}`;
+        if (!newTitleValue || !newAuthorValue) {
             alert('Title and Author are required. Please enter bookinformation and try to save again!')
         } else {
             sendRequest(editQuery, fetchBookSelection);
         }
     }
 
-    function errorBuilder(message, requestCount, queries) {
-        // Activate add-button after 5 failed requests.
-        if(requestCount == 5) {
+    function createStatusUpdate(message, requestCount, queries, result) {
+        // Determin which type of operation the statusmessage regards.
+        let queryType = '';
+        if(queries.includes('insert')) {
+            queryType = 'ADD BOOK';
+        } else if(queries.includes('select')) {
+            queryType = 'VIEW BOOKS';
+        } else if(queries.includes('update')) {
+            queryType = 'EDIT BOOK';
+        } else if(queries.includes('delete')) {
+            queryType = 'REMOVE BOOK';
+        } else {
+            queryType = queries;
+        }
+
+        if (requestCount == 5) {
             addBookSubmitButton.disabled = false;
         }
-        // Create the UL for errorinformation
-        let newError = document.createElement('ul');
-        newError.className = 'error_list_item';
-        errorContainer.prepend(newError);
+        let newStatus = document.createElement('ul');
+        
+        if(result == 'success') {
+            newStatus.className = 'status_list_item green--text';
+            message = 'SUCCESS!'
+        } else if(result == 'fail') {
+            newStatus.className = 'status_list_item red--text';
+        }
+        statusContainer.prepend(newStatus);
+        createStatusInfo(newStatus, message, requestCount, queryType)
+    }
 
-        // Add errorinformation
-        let newErrorMsg = document.createElement('li');
-        newErrorMsg.className = 'error_list_item-message';
-        newErrorMsg.innerHTML = message + ' | On query: ' + queries;
-        newError.appendChild(newErrorMsg);
+    function createStatusInfo(statusContainer, message, requestCount, queryType) {
+        let newStatusMsg = document.createElement('li');
+        newStatusMsg.className = 'status_list_item-message';
+        newStatusMsg.innerHTML = message + ' | When trying to: ' + queryType;
+        statusContainer.appendChild(newStatusMsg);
 
-        // Add attemptnumber
         let newAttemptNr = document.createElement('li');
-        newAttemptNr.className = 'error_list_item-attemptnumber';
+        newAttemptNr.className = 'status_list_item-attemptnumber';
         newAttemptNr.innerHTML = requestCount;
-        newError.appendChild(newAttemptNr);
-
+        statusContainer.appendChild(newAttemptNr);
     }
 })

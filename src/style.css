@@ -155,29 +155,29 @@ button:hover {
         color: white;
 }
 
-.newTitle {
+.newTitle, .newAuthor {
     margin: 1rem;
 }
 
 /* Error-container in footer */
 
-.error_container {
+.status_container {
     background: #2C4E4C;
     background-size: cover;
 
 }
 
-.error_list_container {
+.status_list_container {
     margin-bottom: 0px;
     max-height: 12vh;
     overflow: auto;
 }
 
-.error_list_title {
+.status_list_title {
     padding: 1rem 0 0 0;
 }
 
-.error_list_item {
+.status_list_item {
     display: grid;
     grid-template-areas: 
     "errormsg attemptnr";
@@ -186,17 +186,17 @@ button:hover {
     border-bottom: 3px solid black;
 }
 
-.error_list_item li{
+.status_list_item li{
     display: inline;
     padding: 0.5rem 1rem 0.5rem 1rem;
     
 }
 
-.error_list_item-message {
+.status_list_item-message {
     grid-area: errormsg;
 }
 
-.error_list_item-attemptnumber {
+.status_list_item-attemptnumber {
     grid-area: attemptnr;
 }
 
@@ -272,6 +272,13 @@ button:hover {
     font-size: 1rem;
 }
 
+.red--text {
+    color: #ff6666;
+}
+
+.green--text {
+    color: lightgreen;
+}
 
 /* Media Queries */
 
